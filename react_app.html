@@ -19,32 +19,19 @@
       let title = 'Title'
       let message = 'New title'
 
-      const msg = {
-        fontSize: "20pt",
-        fontWeight: "bold",
-        color: "red",
-        border: "2px solid green"
-      }
-
-      let printMsg = (msg, size, color) => {
-        const style = {
-          fontSize: size + "pt",
-          fontWeight: "700",
-          color: color,
-          border: "1px solid " + color
-        }
-        return <p style={style}>{msg}</p>
-      }
+      let data = [
+        <li className="list-group-item">one</li>,
+        <li className="list-group-item">two</li>,
+        <li className="list-group-item">three</li>,
+      ]
 
       let el = (
         <div>
           <h2>{title}</h2>
           <p>{message}</p>
-          <div className="alert alert-secondary mt-3">
-            {printMsg('1メッセージ', 36, '#fff')}
-            {printMsg('2メッセージ', 24, '#aaa')}
-            {printMsg('3メッセージ', 12, '#666')}
-          </div>
+          <ul className="list-group mt-4">
+            {data}
+          </ul>
         </div>
       )
       ReactDOM.render(el, dom)
