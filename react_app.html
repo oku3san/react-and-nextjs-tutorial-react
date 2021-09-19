@@ -19,37 +19,21 @@
       let title = 'Title'
       let message = 'New title'
 
-      let data = [
-        {name: 'Taro', mail:'taro@yamada', age: 45},
-        {name: 'Hanako', mail:'hanako@flower', age: 37},
-        {name: 'Satoko', mail:'satoko@imo', age: 33},
-      ]
+      let counter = 0
 
-      let el = (
-        <div>
-          <h2>{title}</h2>
-          <p>{message}</p>
-          <table className="table table-striped mt-4">
-            <thead className="thead-dark">
-              <tr>
-                <th>name</th>
-                <th>mail</th>
-                <th>age</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((value) => (
-                <tr>
-                  <td>{value.name}</td>
-                  <td>{value.mail}</td>
-                  <td>{value.age}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )
-      ReactDOM.render(el, dom)
+      setInterval(() => {
+        counter++
+        let el = (
+          <div>
+            <h2>{title}</h2>
+            <p>{message}</p>
+            <h5 className="alert alert-primary">
+              count: {counter}
+            </h5>
+          </div>
+        )
+        ReactDOM.render(el, dom)
+      }, 1000)
     </script>
   </body>
 </html>
