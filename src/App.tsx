@@ -6,43 +6,36 @@ import Rect from './Rect';
 const App = (props: any) => {
   let input = ''
 
+  const [title, setTitle] = useState('input form')
+  const [message, setMessage] = useState('type your name')
+
+  const doChange = (event: any) => {
+    input = event.target.value
+  }
+
+  const doSubmit = (event: any) => {
+    console.log('aaa')
+    setTitle('send form')
+    setMessage('Hello, ' + input + '!!')
+    event.preventDefault()
+  }
+
   return (
     <>
       <h1 className="bg-primary text-white display-4">React</h1>
       <div className="container">
-        <Message title="Children">
-          これはコンポーネント内のコンテンツです。
-          丸でテキストを分割し、リストにて表示します。
-          改行は必要ありません。
-        </Message>
+        <h4>{title}</h4>
+        <p className="card h5 p-3">{message}</p>
+        <div className="alert alert-primary mt-3">
+          <form onSubmit={doSubmit}>
+            <div className="form-group">
+              <label>Message:</label>
+              <input type="text" className="form-control" onChange={doChange} />
+            </div>
+            <input type="submit" className="btn btn-primary" value="Click" />
+          </form>
+        </div>
       </div>
-    </>
-  )
-}
-
-const Message = (props: any) => {
-  const li: any = {
-    fontSize: "14pt",
-    fontWeight: "bold",
-    color: "#090",
-  }
-
-  let content = props.children
-  let arr = content.split('。')
-  let arr2 = []
-  for(let i = 0; i < arr.length; i++) {
-    if (arr[i].trim() != '') {
-      arr2.push(arr[i])
-    }
-  }
-  let list = arr2.map((value, key) => {
-    return <li className="list-group-item" style={li} key={key}>{key + 1}. {value}</li>
-  })
-
-  return (
-    <>
-      <h2>{props.title}</h2>
-      <ol className="list-group">{list}</ol>
     </>
   )
 }
