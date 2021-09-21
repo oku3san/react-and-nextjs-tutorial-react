@@ -8,16 +8,10 @@ const App = (props: any) => {
 
   const [title, setTitle] = useState('input form')
   const [message, setMessage] = useState('type your name')
+  const [max, setMax] = useState(10)
 
-  const doChange = (event: any) => {
-    input = event.target.value
-  }
-
-  const doSubmit = (event: any) => {
-    console.log('aaa')
-    setTitle('send form')
-    setMessage('Hello, ' + input + '!!')
-    event.preventDefault()
+  const doCheck = (event: any) => {
+    alert(`${event.target.value} は長すぎます。(最大 ${max} 文字)`)
   }
 
   return (
@@ -25,19 +19,36 @@ const App = (props: any) => {
       <h1 className="bg-primary text-white display-4">React</h1>
       <div className="container">
         <h4>{title}</h4>
-        <p className="card h5 p-3">{message}</p>
-        <div className="alert alert-primary mt-3">
-          <form onSubmit={doSubmit}>
-            <div className="form-group">
-              <label>Message:</label>
-              <input type="text" className="form-control" onChange={doChange} />
-            </div>
-            <input type="submit" className="btn btn-primary" value="Click" />
-          </form>
-        </div>
+        <Message maxlength={max} onCheck={doCheck} />
       </div>
     </>
   )
+}
+
+const Message = (props: any) => {
+
+  const li: any = {
+    fontSize: "14pt",
+    fontWeight: "bold",
+    color: "#090",
+  }
+
+  const doChange = (event: any) => {
+    if (event.target.value.length > props.maxlength) {
+      props.onCheck(event)
+      event.target.value.substr(0, props.maxlength)
+    }
+  }
+
+  return (
+    <>
+      <div className="form-group">
+        <label>input:</label>
+        <input type="text" className="form-control" onChange={doChange} />
+      </div>
+    </>
+  )
+
 }
 
 export default App;
