@@ -19,7 +19,12 @@ const CardMessage = (props: any) => {
 
 const App = (props: any) => {
 
-  const [msg] = useState('aiueo')
+  const [msg, setMsg] = useState('aiueo')
+
+  const doAction = () => {
+    let res = window.prompt('type your name')
+    setMsg(`Hello, ${res} !!`)
+  }
 
   return (
     <>
@@ -28,6 +33,11 @@ const App = (props: any) => {
         <h4 className="my-3">Hook sample</h4>
         <AlertMessage message={msg} />
         <CardMessage message={msg} />
+        <div className="text-center">
+          <button onClick={doAction} className="btn btn-primary">
+            Click me
+          </button>
+        </div>
       </div>
     </>
   )
