@@ -13,19 +13,31 @@ const AlertMessage = (props: any) => {
 
 const App = (props: any) => {
 
-  const [val, setVal] = useState(0)
-  const [msg, setMsg] = useState('set a number...')
+  const [val, setVal] = useState(1000)
+  const [tax1, setTax1] = useState(0)
+  const [tax2, setTax2] = useState(0)
+  const [msg, setMsg] = useState('set a price...')
 
   const doChange = (event: any) => {
     setVal(event.target.value)
   }
 
   useEffect(() => {
-    let total = 0
-    for (let i = 0; i <= val; i++) {
-      total += i
-    }
-    setMsg("Total:" + total + ".")
+    let res: any = (
+      <>
+        <p>軽減税率(8%) : {tax1} 円</p>
+        <p>軽減税率(10%) : {tax2} 円</p>
+      </>
+    )
+    setMsg(res)
+  }, [tax1, tax2])
+
+  useEffect(() => {
+    setTax1(Math.floor(val * 1.08))
+  })
+
+  useEffect(() => {
+    setTax2(Math.floor(val * 1.1))
   })
 
   return (
