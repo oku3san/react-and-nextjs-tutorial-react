@@ -1,21 +1,36 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 
-const useCounter = (): any => {
-  const [num, setNum] = useState(0)
-  const count = () => {
-    setNum(num + 1)
+const useTax = (t1: any, t2: any) => {
+  const [price, setPrice] = useState(1000)
+  const [tx1] = useState(t1)
+  const [tx2] = useState(t2)
+
+  const tax: any = () => {
+    return Math.floor(price * (1.0 + tx1 / 100))
   }
-  return [num, count]
+
+  const reduced: any = () => {
+    return Math.floor(price * (1.0 + tx2 / 100))
+  }
+
+  return [price, tax, reduced, setPrice]
 }
 
 const AlertMessage = (props: any) => {
-  const [counter, plus] = useCounter()
+  const [price, tax, reduced, setPrice] = useTax(10, 8)
+  const DoChange = (event: any) => {
+    let p = event.target.value
+    setPrice(p)
+  }
   return (
     <>
       <div className="alert alert-primary h5 text-primary">
-        <h5>count: {counter} .</h5>
-        <button onClick={plus} className="btn btn-primary">count</button>
+        <p className="h5">通常税率: {tax()} 円</p>
+        <p className="h5">軽減税率: {reduced()} 円</p>
+        <div className="form-group">
+          <input type="number" className="form-control" onChange={DoChange} value={price} />
+        </div>
       </div>
     </>
   )
